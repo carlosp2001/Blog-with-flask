@@ -10,6 +10,12 @@ from flask_gravatar import Gravatar
 from forms import CreatePostForm, RegisterForm, LoginForm
 from functools import wraps
 from flask import abort
+import os
+from dotenv import load_dotenv
+
+load_dotenv('.env')
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
 # Create admin-only decorator
@@ -25,7 +31,7 @@ def admin_only(f):
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
